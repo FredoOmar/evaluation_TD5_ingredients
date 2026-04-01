@@ -40,14 +40,14 @@ public class IngredientRepository {
     }
 
     private List<StockMovement> findStockMovements(Integer ingredientId) {
-        String sql = "SELECT id, id_ingredient, movement_type AS type, quantity, unit, movement_datetime AS creation_datetime " +
+        String sql = "SELECT id, id_ingredient, movement_type, quantity, unit, movement_datetime " +
                 "FROM stock_movement WHERE id_ingredient = ?";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             StockMovement sm = new StockMovement();
             sm.setId(rs.getInt("id"));
-            sm.setIngredientId(rs.getInt("ingredient_id"));
-            sm.setType(MovementTypeEnum.valueOf(rs.getString("type")));
-            sm.setCreationDatetime(rs.getTimestamp("creation_datetime").toInstant());
+            sm.setIngredientId(rs.getInt("id_ingredient"));
+            sm.setType(MovementTypeEnum.valueOf(rs.getString("movement_type")));
+            sm.setCreationDatetime(rs.getTimestamp("movement_datetime").toInstant());
             StockValue sv = new StockValue();
             sv.setQuantity(rs.getDouble("quantity"));
             sv.setUnit(Unit.fromString(rs.getString("unit")));
