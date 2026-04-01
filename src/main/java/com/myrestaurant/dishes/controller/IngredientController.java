@@ -20,20 +20,17 @@ public class IngredientController {
         this.ingredientService = ingredientService;
     }
 
-    // a) GET /ingredients
+
     @GetMapping
     public ResponseEntity<List<IngredientDTO>> getAllIngredients() {
         return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
 
-    // b) GET /ingredients/{id}
     @GetMapping("/{id}")
     public ResponseEntity<IngredientDTO> getIngredientById(@PathVariable Integer id) {
         return ResponseEntity.ok(ingredientService.getIngredientById(id));
     }
 
-    // c) GET /ingredients/{id}/stock?at={temporal}&unit={unit}
-    // Si at ou unit absent -> 400 via IllegalArgumentException -> GlobalExceptionHandler
     @GetMapping("/{id}/stock")
     public ResponseEntity<StockValueDTO> getIngredientStock(
             @PathVariable Integer id,

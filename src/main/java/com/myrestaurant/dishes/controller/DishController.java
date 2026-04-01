@@ -18,13 +18,13 @@ public class DishController {
         this.dishService = dishService;
     }
 
-    // d) GET /dishes
+
     @GetMapping
     public ResponseEntity<List<DishDTO>> getAllDishes() {
         return ResponseEntity.ok(dishService.getAllDishes());
     }
 
-    // e) PUT /dishes/{id}/ingredients
+
     @PutMapping("/{id}/ingredients")
     public ResponseEntity<DishDTO> updateDishIngredients(
             @PathVariable Integer id,
@@ -36,7 +36,6 @@ public class DishController {
         return ResponseEntity.ok(dishService.updateDishIngredients(id, ingredients));
     }
 
-    // EVALUATION : GET /dishes/{id}/ingredients?ingredientName={i}&ingredientPriceAround={p}
     @GetMapping("/{id}/ingredients")
     public ResponseEntity<List<IngredientDTO>> getDishIngredients(
             @PathVariable Integer id,
